@@ -2,6 +2,7 @@ package com.example.api;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
@@ -25,8 +26,16 @@ public class CoursesManager {
     return this.coursesList;
   }
 
+  public Optional<Course> getCourseById(int courseId) {
+    return this.coursesList.stream().filter(item -> item.id == courseId).findFirst();
+  }
+
   public boolean addCourse(Course newCourse) {
     System.out.println("newCourse" + newCourse);
     return this.coursesList.add(newCourse);
+  }
+
+  public boolean removeCourse(int courseId) {
+    return this.coursesList.removeIf(course -> course.id == courseId);
   }
 }

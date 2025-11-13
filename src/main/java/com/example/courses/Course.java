@@ -5,9 +5,11 @@ import com.example.staff.Teacher;
 public class Course {
   private String description;
   private int hoursPerWeek;
+  public int id;
   private String name;
   public CourseParticipants courseParticipants;
   public Teacher courseTeacher;
+  private static int coursesCount = 0;
 
   public Course(
       String description,
@@ -22,6 +24,9 @@ public class Course {
     this.hoursPerWeek = hoursPerWeek;
 
     this.courseTeacher.addHours(Double.valueOf(hoursPerWeek));
+
+    coursesCount++;
+    this.id = coursesCount;
   }
 
   public String getDescription() {
