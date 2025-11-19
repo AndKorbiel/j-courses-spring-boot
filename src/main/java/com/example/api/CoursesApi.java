@@ -15,30 +15,30 @@ import com.example.courses.Course;
 
 @RestController
 public class CoursesApi {
-  private final CoursesManager coursesManager;
+  // private final CoursesManager coursesManager;
 
-  @Autowired
-  public CoursesApi(CoursesManager coursesManager) {
-    this.coursesManager = coursesManager;
-  }
+  // @Autowired
+  // public CoursesApi(CoursesManager coursesManager) {
+  // this.coursesManager = coursesManager;
+  // }
 
-  @GetMapping("/getAll")
-  public List<Course> getCoursesList() {
-    return coursesManager.getCoursesList();
-  }
+  // @GetMapping("/getAll")
+  // public List<Course> getCoursesList() {
+  // return coursesManager.getCoursesList();
+  // }
 
-  @GetMapping("/getById")
-  public Optional<Course> getCourseById(@RequestParam int id) {
-    return coursesManager.getCourseById(id);
-  }
+  // @GetMapping("/getById")
+  // public Optional<Course> getCourseById(@RequestParam int id) {
+  // return coursesManager.getCourseById(id);
+  // }
 
-  @PostMapping("/addCourse")
-  public boolean addCourse(@RequestBody Course newCourse) {
-    return coursesManager.addCourse(newCourse);
-  }
+  // @PostMapping("/addCourse")
+  // public boolean addCourse(@RequestBody Course newCourse) {
+  // return coursesManager.addCourse(newCourse);
+  // }
 
-  @DeleteMapping("/removeCourse")
-  public boolean removeCourse(@RequestParam int id) {
-    return coursesManager.removeCourse(id);
-  }
+  // @DeleteMapping("/removeCourse")
+  // public boolean removeCourse(@RequestParam int id) {
+  // return coursesManager.removeCourse(id);
+  // }
 }

@@ -12,30 +12,32 @@ import com.example.staff.Teacher;
 
 @Service
 public class CoursesManager {
-  private List<Course> coursesList = new ArrayList<>();
+  // private List<Course> coursesList = new ArrayList<>();
 
-  public CoursesManager() {
-    List<Skills> mrAskills = List.of(Skills.ENGLISH, Skills.MATH);
-    Teacher mrA = new Teacher("Mr Andrew", 10, mrAskills);
-    Course enligshCourse = new Course("English course for students", "English course", mrA, 20, 8);
+  // public CoursesManager() {
+  // List<Skills> mrAskills = List.of(Skills.ENGLISH, Skills.MATH);
+  // Teacher mrA = new Teacher("Mr Andrew", 10, mrAskills);
+  // Course enligshCourse = new Course("English course for students", "English
+  // course", mrA, 20, 8);
 
-    this.coursesList.add(enligshCourse);
-  }
+  // this.coursesList.add(enligshCourse);
+  // }
 
-  public List<Course> getCoursesList() {
-    return this.coursesList;
-  }
+  // public List<Course> getCoursesList() {
+  // return this.coursesList;
+  // }
 
-  public Optional<Course> getCourseById(int courseId) {
-    return this.coursesList.stream().filter(item -> item.id == courseId).findFirst();
-  }
+  // public Optional<Course> getCourseById(int courseId) {
+  // return this.coursesList.stream().filter(item -> item.id ==
+  // courseId).findFirst();
+  // }
 
-  public boolean addCourse(Course newCourse) {
-    System.out.println("newCourse" + newCourse);
-    return this.coursesList.add(newCourse);
-  }
+  // public boolean addCourse(Course newCourse) {
+  // System.out.println("newCourse" + newCourse);
+  // return this.coursesList.add(newCourse);
+  // }
 
-  public boolean removeCourse(int courseId) {
-    return this.coursesList.removeIf(course -> course.id == courseId);
-  }
+  // public boolean removeCourse(int courseId) {
+  // return this.coursesList.removeIf(course -> course.id == courseId);
+  // }
 }

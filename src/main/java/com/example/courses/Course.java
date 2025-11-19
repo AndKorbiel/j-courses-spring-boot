@@ -2,9 +2,16 @@ package com.example.courses;
 
 import com.example.staff.Teacher;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+
 public class Course {
   private String description;
   private int hoursPerWeek;
+  @Id
+  @GeneratedValue(strategy = GenerationType.AUTO)
   public int id;
   private String name;
   public CourseParticipants courseParticipants;
