@@ -1,6 +1,6 @@
 package com.example.courses;
 
-import com.example.staff.Teacher;
+import com.example.staff.entity.Teacher;
 
 public class MathCourse extends Course {
   public MathCourse(Teacher courseTeacher, int availableSeats) {

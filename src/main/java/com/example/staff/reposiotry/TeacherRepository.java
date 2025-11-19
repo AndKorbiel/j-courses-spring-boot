@@ -1,11 +1,13 @@
-package com.example.staff;
+package com.example.staff.reposiotry;
 
 import java.util.List;
 
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
+import com.example.staff.entity.Teacher;
+
 @Repository
-public interface TeacherRepo extends CrudRepository<Teacher, Long> {
+public interface TeacherRepository extends CrudRepository<Teacher, Long> {
   List<Teacher> findBySalaryGreaterThan(double salary);
 }

@@ -7,8 +7,8 @@ import java.util.List;
 
 import org.junit.Test;
 
+import com.example.staff.entity.Teacher;
 import com.example.shared.Skills;
-import com.example.staff.Teacher;
 
 public class CourseTest {
   // given

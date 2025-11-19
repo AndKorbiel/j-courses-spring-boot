@@ -7,8 +7,8 @@ import java.util.Optional;
 import org.springframework.stereotype.Service;
 
 import com.example.courses.Course;
+import com.example.staff.entity.Teacher;
 import com.example.shared.Skills;
-import com.example.staff.Teacher;
 
 @Service
 public class CoursesManager {
