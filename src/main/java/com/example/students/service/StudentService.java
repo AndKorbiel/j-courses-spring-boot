@@ -11,7 +11,7 @@ import jakarta.transaction.Transactional;
 
 @Service
 public class StudentService {
-  private StudentRepository studentRepository;
+  private final StudentRepository studentRepository;
 
   public StudentService(StudentRepository studentRepository) {
     this.studentRepository = studentRepository;

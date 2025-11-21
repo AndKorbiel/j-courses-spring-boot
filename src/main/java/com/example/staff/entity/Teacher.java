@@ -2,8 +2,11 @@ package com.example.staff.entity;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import com.example.courses.entity.Course;
 import com.example.shared.Skills;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.CollectionTable;
 import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
@@ -12,6 +15,7 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 
 @Entity
 public class Teacher {
@@ -28,6 +32,9 @@ public class Teacher {
   @Enumerated(EnumType.STRING)
   private List<Skills> skills = new ArrayList<>();
 
+  // @OneToMany(mappedBy = "courseTeacher", cascade = CascadeType.ALL)
+  // public List<Course> assignedCourses;
+
   public Teacher() {
   }
 
@@ -36,6 +43,10 @@ public class Teacher {
     this.salary = salary;
     this.skills = skills;
   }
+
+  // public void addCourse(Course newCourse) {
+  // this.assignedCourses.add(newCourse);
+  // }
 
   public double getSalary() {
     return this.salary;

@@ -3,12 +3,14 @@ package com.example.students.entity;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.example.courses.Course;
+import com.example.courses.entity.Course;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 
 @Entity
 public class Student {
@@ -17,6 +19,9 @@ public class Student {
   public Long id;
 
   public String name;
+
+  // @ManyToOne
+  // @JoinColumn(name = "course_id")
   // private List<Course> coursesEnrolled = new ArrayList<>();
 
   public Student() {

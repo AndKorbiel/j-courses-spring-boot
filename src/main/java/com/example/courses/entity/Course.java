@@ -1,21 +1,34 @@
-package com.example.courses;
+package com.example.courses.entity;
 
+import com.example.courses.CourseParticipants;
 import com.example.staff.entity.Teacher;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 
+@Entity
 public class Course {
-  private String description;
-  private int hoursPerWeek;
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
-  public int id;
+  public Long id;
+
+  private String description;
+  private int hoursPerWeek;
   private String name;
-  public CourseParticipants courseParticipants;
-  public Teacher courseTeacher;
-  private static int coursesCount = 0;
+  // public CourseParticipants courseParticipants;
+
+  // @ManyToOne(fetch = FetchType.LAZY)
+  // @JoinColumn(name = "teacher_id")
+  // public Teacher courseTeacher;
+
+  public Course() {
+
+  }
 
   public Course(
       String description,
@@ -25,14 +38,11 @@ public class Course {
       int hoursPerWeek) {
     this.description = description;
     this.name = name;
-    this.courseParticipants = new CourseParticipants(availableSeats);
-    this.courseTeacher = courseTeacher;
+    // this.courseParticipants = new CourseParticipants(availableSeats);
+    // this.courseTeacher = courseTeacher;
     this.hoursPerWeek = hoursPerWeek;
 
-    this.courseTeacher.addHours(Double.valueOf(hoursPerWeek));
-
-    coursesCount++;
-    this.id = coursesCount;
+    // this.courseTeacher.addHours(Double.valueOf(hoursPerWeek));
   }
 
   public String getDescription() {

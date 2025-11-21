@@ -39,8 +39,8 @@ public class StudentController {
   }
 
   @PutMapping("/update")
-  public Student update(@RequestBody Student newStudent) {
-    return studentService.updateOrAddStudent(newStudent);
+  public Student update(@RequestBody Student student) {
+    return studentService.updateOrAddStudent(student);
   }
 
   @DeleteMapping("/delete")
