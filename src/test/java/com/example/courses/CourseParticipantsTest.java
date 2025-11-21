@@ -8,7 +8,7 @@ import java.util.Map;
 
 import org.junit.Test;
 
-import com.example.students.Student;
+import com.example.students.entity.Student;
 
 public class CourseParticipantsTest {
   // given
@@ -19,7 +19,7 @@ public class CourseParticipantsTest {
   @Test
   public void testEnrollStudents() {
     // given
-    final Map<Integer, Student> enrolledStudents = new HashMap<>();
+    final Map<Long, Student> enrolledStudents = new HashMap<>();
 
     // when
     assertEquals(10, courseParticipatns.getAvailableSeats());
@@ -44,7 +44,7 @@ public class CourseParticipantsTest {
   @Test
   public void testRemoveEnrolledStudents() {
     // given
-    final Map<Integer, Student> enrolledStudents = new HashMap<>();
+    final Map<Long, Student> enrolledStudents = new HashMap<>();
 
     courseParticipatns.enrollStudent(studentA);
     courseParticipatns.enrollStudent(studentB);

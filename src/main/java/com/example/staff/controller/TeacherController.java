@@ -2,7 +2,6 @@ package com.example.staff.controller;
 
 import java.util.Optional;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,7 +19,6 @@ import com.example.staff.service.TeacherService;
 public class TeacherController {
   private final TeacherService teacherService;
 
-  @Autowired
   public TeacherController(TeacherService teacherService) {
     this.teacherService = teacherService;
   }
@@ -31,23 +29,22 @@ public class TeacherController {
   }
 
   @GetMapping("/getById")
-  public Optional<Teacher> getTeacherById(@RequestParam Long id) {
+  public Optional<Teacher> getById(@RequestParam Long id) {
     return teacherService.findById(id);
   }
 
-  @PostMapping("/addTeacher")
-  public void addTeacher(@RequestBody Teacher newTeacher) {
+  @PostMapping("/add")
+  public void add(@RequestBody Teacher newTeacher) {
     teacherService.addNewTeacher(newTeacher);
   }
 
-  @PutMapping("/updateTeacher")
-  public void updateTeacher(@RequestBody Teacher teacher) {
+  @PutMapping("/update")
+  public void update(@RequestBody Teacher teacher) {
     teacherService.updateOrInsertTeacher(teacher);
   }
 
-  @DeleteMapping("/deleteTeacher")
-  public void deleteTeacher(Long id) {
+  @DeleteMapping("/delete")
+  public void delete(Long id) {
     teacherService.deleteTeacher(id);
   }
-
 }

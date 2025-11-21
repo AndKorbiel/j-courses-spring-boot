@@ -3,7 +3,6 @@ package com.example.staff.service;
 import java.util.List;
 import java.util.Optional;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Service;
@@ -17,7 +16,7 @@ import com.example.shared.Skills;
 
 @Service
 public class TeacherService {
-  @Autowired
+
   private TeacherRepository teacherRepository;
 
   public TeacherService(TeacherRepository teacherRepository) {

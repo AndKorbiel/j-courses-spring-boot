@@ -5,18 +5,18 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-import com.example.students.Student;
+import com.example.students.entity.Student;
 
 public class CourseParticipants {
   private int availableSeats;
-  private Map<Integer, Student> registeredStudentsList = new HashMap<>();
+  private Map<Long, Student> registeredStudentsList = new HashMap<>();
   private List<Student> waitingStudentsList = new LinkedList<>();
 
   public CourseParticipants(int availableSeats) {
     this.availableSeats = availableSeats;
   }
 
-  public Map<Integer, Student> getRegisteredStudentsListList() {
+  public Map<Long, Student> getRegisteredStudentsListList() {
     return this.registeredStudentsList;
   }
 
@@ -26,7 +26,7 @@ public class CourseParticipants {
 
   public void enrollStudent(Student newStudent) {
     if (!this.checkIfCourseIsFull()) {
-      int studentId = newStudent.getId();
+      Long studentId = newStudent.getId();
 
       this.registeredStudentsList.put(studentId, newStudent);
       this.availableSeats--;
@@ -36,7 +36,7 @@ public class CourseParticipants {
   }
 
   public void removeStudent(Student currentStudent) {
-    int studentId = currentStudent.getId();
+    Long studentId = currentStudent.getId();
 
     this.registeredStudentsList.remove(studentId);
 
