@@ -1,15 +1,17 @@
 package com.example.courses.entity;
 
-import com.example.courses.CourseParticipants;
 import com.example.staff.entity.Teacher;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
+import jakarta.persistence.PrimaryKeyJoinColumn;
 
 @Entity
 public class Course {
@@ -20,11 +22,15 @@ public class Course {
   private String description;
   private int hoursPerWeek;
   private String name;
-  // public CourseParticipants courseParticipants;
 
-  // @ManyToOne(fetch = FetchType.LAZY)
-  // @JoinColumn(name = "teacher_id")
-  // public Teacher courseTeacher;
+  @OneToOne(mappedBy = "course", cascade = CascadeType.ALL)
+  @PrimaryKeyJoinColumn
+  public CourseParticipants courseParticipants;
+
+  @ManyToOne
+  @JoinColumn(name = "teacher_id")
+  @JsonBackReference
+  public Teacher courseTeacher;
 
   public Course() {
 
@@ -38,8 +44,8 @@ public class Course {
       int hoursPerWeek) {
     this.description = description;
     this.name = name;
-    // this.courseParticipants = new CourseParticipants(availableSeats);
-    // this.courseTeacher = courseTeacher;
+    this.courseParticipants = new CourseParticipants(11);
+    this.courseTeacher = courseTeacher;
     this.hoursPerWeek = hoursPerWeek;
 
     // this.courseTeacher.addHours(Double.valueOf(hoursPerWeek));

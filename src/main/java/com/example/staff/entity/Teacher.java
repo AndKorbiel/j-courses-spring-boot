@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.example.courses.entity.Course;
 import com.example.shared.Skills;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.CollectionTable;
@@ -32,8 +33,9 @@ public class Teacher {
   @Enumerated(EnumType.STRING)
   private List<Skills> skills = new ArrayList<>();
 
-  // @OneToMany(mappedBy = "courseTeacher", cascade = CascadeType.ALL)
-  // public List<Course> assignedCourses;
+  @OneToMany(mappedBy = "courseTeacher", cascade = CascadeType.ALL)
+  @JsonManagedReference
+  public List<Course> assignedCourses;
 
   public Teacher() {
   }
@@ -44,9 +46,9 @@ public class Teacher {
     this.skills = skills;
   }
 
-  // public void addCourse(Course newCourse) {
-  // this.assignedCourses.add(newCourse);
-  // }
+  public void addCourse(Course newCourse) {
+    this.assignedCourses.add(newCourse);
+  }
 
   public double getSalary() {
     return this.salary;
