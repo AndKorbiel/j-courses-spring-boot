@@ -47,4 +47,9 @@ public class TeacherController {
   public void delete(Long id) {
     teacherService.deleteTeacher(id);
   }
+
+  @GetMapping("/getSalary")
+  public double getSalary(@RequestParam Long id) {
+    return teacherService.getMonthlySalary(id);
+  }
 }

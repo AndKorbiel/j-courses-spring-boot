@@ -44,6 +44,16 @@ public class TeacherService {
     teacherRepository.deleteById(id);
   }
 
+  public double getMonthlySalary(Long id) {
+    Teacher teacher = teacherRepository.findById(id).orElse(null);
+
+    if (teacher != null) {
+      return teacher.countMonthlySalary();
+    }
+
+    return 0.0;
+  }
+
   // adnotation used for seeding DB on run
   @EventListener(ApplicationReadyEvent.class)
   public void runExample() {

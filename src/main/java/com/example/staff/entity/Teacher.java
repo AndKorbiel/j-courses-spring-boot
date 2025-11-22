@@ -26,7 +26,7 @@ public class Teacher {
 
   public String name;
   private double hoursPerWeek;
-  private double salary;
+  private double salaryPerHour;
 
   @ElementCollection(targetClass = Skills.class)
   @CollectionTable
@@ -40,9 +40,9 @@ public class Teacher {
   public Teacher() {
   }
 
-  public Teacher(String name, double salary, List<Skills> skills) {
+  public Teacher(String name, double salaryPerHour, List<Skills> skills) {
     this.name = name;
-    this.salary = salary;
+    this.salaryPerHour = salaryPerHour;
     this.skills = skills;
   }
 
@@ -51,7 +51,7 @@ public class Teacher {
   }
 
   public double getSalary() {
-    return this.salary;
+    return this.salaryPerHour;
   }
 
   public double getHoursPerWeek() {
@@ -67,6 +67,6 @@ public class Teacher {
   }
 
   public Double countMonthlySalary() {
-    return hoursPerWeek * 4 * salary;
+    return hoursPerWeek * 4 * salaryPerHour;
   }
 }
