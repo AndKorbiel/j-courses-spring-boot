@@ -5,16 +5,21 @@ import java.util.Optional;
 import org.springframework.stereotype.Service;
 
 import com.example.courses.entity.Course;
+import com.example.courses.entity.CourseParticipants;
 import com.example.courses.repository.CourseRepository;
+import com.example.staff.entity.Teacher;
+import com.example.staff.service.TeacherService;
 
 import jakarta.transaction.Transactional;
 
 @Service
 public class CourseService {
   private final CourseRepository courseRepository;
+  private final TeacherService teacherService;
 
-  public CourseService(CourseRepository courseRepository) {
+  public CourseService(CourseRepository courseRepository, TeacherService teacherService) {
     this.courseRepository = courseRepository;
+    this.teacherService = teacherService;
   }
 
   public Iterable<Course> findAll() {
@@ -25,8 +30,18 @@ public class CourseService {
     return courseRepository.findById(id);
   }
 
-  public Course addNewCourse(Course newCourse) {
-    return courseRepository.save(newCourse);
+  public Course addNewCourse(CourseApi newCourse) {
+    CourseParticipants participants = new CourseParticipants(newCourse.availableSeats);
+    Teacher courseTeacher = teacherService.findById(newCourse.teacherId).orElse(null);
+
+    Course courseToSave = new Course(
+        newCourse.description,
+        newCourse.name,
+        courseTeacher,
+        participants,
+        newCourse.hoursPerWeek);
+
+    return courseRepository.save(courseToSave);
   }
 
   @Transactional

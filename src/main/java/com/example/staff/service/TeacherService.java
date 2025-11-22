@@ -31,6 +31,7 @@ public class TeacherService {
   }
 
   public Teacher addNewTeacher(Teacher newTeacher) {
+    newTeacher.addHours(0D);
     return teacherRepository.save(newTeacher);
   }
 
@@ -48,9 +49,5 @@ public class TeacherService {
   public void runExample() {
     Teacher teacherA = new Teacher("Teacher A", 10, List.of(Skills.ENGLISH, Skills.MATH));
     teacherRepository.save(teacherA);
-
-    // logs out result to custom repository method to console
-    List<Teacher> teachers = teacherRepository.findBySalaryGreaterThan(5);
-    System.out.println(teachers);
   }
 }

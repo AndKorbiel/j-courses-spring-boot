@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.courses.entity.Course;
+import com.example.courses.service.CourseApi;
 import com.example.courses.service.CourseService;
 
 @RestController
@@ -34,7 +35,7 @@ public class CourseController {
   }
 
   @PostMapping("/add")
-  public Course add(@RequestBody Course newCourse) {
+  public Course add(@RequestBody CourseApi newCourse) {
     return courseService.addNewCourse(newCourse);
   }
 

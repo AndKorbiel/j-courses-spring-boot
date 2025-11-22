@@ -28,9 +28,7 @@ public class CourseParticipants {
 
   private int availableSeats;
 
-  @OneToOne
-  @MapsId
-  @JoinColumn(name = "course_id")
+  @OneToOne(mappedBy = "courseParticipants")
   private Course course;
 
   // private Map<Long, Student> registeredStudentsList = new HashMap<>();

@@ -11,7 +11,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
-import jakarta.persistence.PrimaryKeyJoinColumn;
+import jakarta.persistence.Transient;
 
 @Entity
 public class Course {
@@ -19,36 +19,38 @@ public class Course {
   @GeneratedValue(strategy = GenerationType.AUTO)
   public Long id;
 
+  private int availableSeats;
   private String description;
   private int hoursPerWeek;
   private String name;
+  private Long courseTeacherId;
 
-  @OneToOne(mappedBy = "course", cascade = CascadeType.ALL)
-  @PrimaryKeyJoinColumn
+  @OneToOne(cascade = CascadeType.ALL)
+  @JoinColumn(name = "courseParticipants_id", referencedColumnName = "id")
   public CourseParticipants courseParticipants;
 
   @ManyToOne
-  @JoinColumn(name = "teacher_id")
+  @JoinColumn(name = "teacher_id", referencedColumnName = "id")
   @JsonBackReference
   public Teacher courseTeacher;
 
   public Course() {
-
   }
 
   public Course(
       String description,
       String name,
       Teacher courseTeacher,
-      int availableSeats,
+      CourseParticipants courseParticipants,
       int hoursPerWeek) {
     this.description = description;
     this.name = name;
-    this.courseParticipants = new CourseParticipants(11);
+    this.courseParticipants = courseParticipants;
     this.courseTeacher = courseTeacher;
     this.hoursPerWeek = hoursPerWeek;
+    this.courseTeacherId = courseTeacher.id;
 
-    // this.courseTeacher.addHours(Double.valueOf(hoursPerWeek));
+    this.courseTeacher.addHours(Double.valueOf(hoursPerWeek));
   }
 
   public String getDescription() {
@@ -59,7 +61,15 @@ public class Course {
     return this.name;
   }
 
+  public int getAvailableSeats() {
+    return this.availableSeats;
+  }
+
   public int getHoursPerWeek() {
     return this.hoursPerWeek;
+  }
+
+  public Long getCourseTeacherId() {
+    return this.courseTeacherId;
   }
 }

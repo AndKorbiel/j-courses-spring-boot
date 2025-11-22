@@ -54,6 +54,10 @@ public class Teacher {
     return this.salary;
   }
 
+  public double getHoursPerWeek() {
+    return this.hoursPerWeek;
+  }
+
   public List<Skills> getSkills() {
     return this.skills;
   }
