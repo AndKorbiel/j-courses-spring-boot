@@ -37,9 +37,10 @@ public class CourseService {
     Course courseToSave = new Course(
         newCourse.description,
         newCourse.name,
+        newCourse.availableSeats,
+        newCourse.hoursPerWeek,
         courseTeacher,
-        participants,
-        newCourse.hoursPerWeek);
+        participants);
 
     return courseRepository.save(courseToSave);
   }

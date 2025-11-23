@@ -1,7 +1,8 @@
 package com.example.courses.entity;
 
 import com.example.staff.entity.Teacher;
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
@@ -11,9 +12,9 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
-import jakarta.persistence.Transient;
 
 @Entity
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Course {
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
@@ -23,7 +24,6 @@ public class Course {
   private String description;
   private int hoursPerWeek;
   private String name;
-  private Long courseTeacherId;
 
   @OneToOne(cascade = CascadeType.ALL)
   @JoinColumn(name = "courseParticipants_id", referencedColumnName = "id")
@@ -31,7 +31,6 @@ public class Course {
 
   @ManyToOne
   @JoinColumn(name = "teacher_id", referencedColumnName = "id")
-  @JsonBackReference
   public Teacher courseTeacher;
 
   public Course() {
@@ -40,15 +39,16 @@ public class Course {
   public Course(
       String description,
       String name,
+      int availableSeats,
+      int hoursPerWeek,
       Teacher courseTeacher,
-      CourseParticipants courseParticipants,
-      int hoursPerWeek) {
+      CourseParticipants courseParticipants) {
     this.description = description;
     this.name = name;
+    this.availableSeats = availableSeats;
+    this.hoursPerWeek = hoursPerWeek;
     this.courseParticipants = courseParticipants;
     this.courseTeacher = courseTeacher;
-    this.hoursPerWeek = hoursPerWeek;
-    this.courseTeacherId = courseTeacher.id;
 
     this.courseTeacher.addHours(Double.valueOf(hoursPerWeek));
   }
@@ -67,9 +67,5 @@ public class Course {
 
   public int getHoursPerWeek() {
     return this.hoursPerWeek;
-  }
-
-  public Long getCourseTeacherId() {
-    return this.courseTeacherId;
   }
 }

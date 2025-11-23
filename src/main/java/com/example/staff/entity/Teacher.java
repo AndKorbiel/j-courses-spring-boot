@@ -5,7 +5,8 @@ import java.util.List;
 
 import com.example.courses.entity.Course;
 import com.example.shared.Skills;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.CollectionTable;
@@ -19,6 +20,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 
 @Entity
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Teacher {
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
@@ -34,7 +36,6 @@ public class Teacher {
   private List<Skills> skills = new ArrayList<>();
 
   @OneToMany(mappedBy = "courseTeacher", cascade = CascadeType.ALL)
-  @JsonManagedReference
   public List<Course> assignedCourses;
 
   public Teacher() {
@@ -46,8 +47,8 @@ public class Teacher {
     this.skills = skills;
   }
 
-  public void addCourse(Course newCourse) {
-    this.assignedCourses.add(newCourse);
+  public List<Course> getAssignedCourses() {
+    return this.assignedCourses;
   }
 
   public double getSalary() {
@@ -64,6 +65,10 @@ public class Teacher {
 
   public void addHours(Double hoursToAdd) {
     this.hoursPerWeek += hoursToAdd;
+  }
+
+  public void addCourse(Course newCourse) {
+    this.assignedCourses.add(newCourse);
   }
 
   public Double countMonthlySalary() {

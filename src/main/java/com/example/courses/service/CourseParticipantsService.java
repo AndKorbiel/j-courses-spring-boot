@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.courses.entity.CourseParticipants;
 import com.example.courses.repository.CourseParticipantsRepository;
+import com.example.students.entity.Student;
 
 import jakarta.transaction.Transactional;
 
@@ -37,4 +38,11 @@ public class CourseParticipantsService {
   public void deleteCourse(Long id) {
     courseParticipantsRepository.deleteById(id);
   }
+
+  // public void enrollStudent(Long courseId, Long studentId) {
+  // CourseParticipants course =
+  // courseParticipantsRepository.findById(courseId).orElse(null);
+
+  // course.enrollStudent(studentId);
+  // }
 }

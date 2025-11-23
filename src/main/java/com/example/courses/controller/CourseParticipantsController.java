@@ -47,4 +47,9 @@ public class CourseParticipantsController {
   public void delete(@RequestParam Long id) {
     courseParticipantsService.deleteCourse(id);
   }
+
+  // @PostMapping("/enroll-student")
+  // public void enrollStudent(@RequestBody Long studentId, Long courseId) {
+  // courseParticipantsService.enrollStudent(courseId, null);
+  // }
 }
