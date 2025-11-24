@@ -18,7 +18,8 @@ public class Student {
 
   public String name;
 
-  @ManyToMany(mappedBy = "courseStudents")
+  @ManyToMany
+  // @ManyToMany(mappedBy = "courseStudents")
   private List<Course> coursesEnrolled;
 
   public Student() {
