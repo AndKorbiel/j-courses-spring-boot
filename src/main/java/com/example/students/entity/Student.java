@@ -1,6 +1,5 @@
 package com.example.students.entity;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import com.example.courses.entity.Course;
@@ -9,8 +8,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.ManyToMany;
 
 @Entity
 public class Student {
@@ -20,9 +18,8 @@ public class Student {
 
   public String name;
 
-  // @ManyToOne
-  // @JoinColumn(name = "course_id")
-  // private List<Course> coursesEnrolled = new ArrayList<>();
+  @ManyToMany(mappedBy = "courseStudents")
+  private List<Course> coursesEnrolled;
 
   public Student() {
   }
@@ -31,11 +28,11 @@ public class Student {
     this.name = name;
   }
 
-  // public void enrollForCourse(Course newCourse) {
-  // this.coursesEnrolled.add(newCourse);
-  // }
-
   public Long getId() {
     return this.id;
+  }
+
+  public List<Course> getEnrolledCoursesList() {
+    return this.coursesEnrolled;
   }
 }

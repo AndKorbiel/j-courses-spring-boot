@@ -1,17 +1,20 @@
 package com.example.courses.entity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.example.staff.entity.Teacher;
+import com.example.students.entity.Student;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToOne;
 
 @Entity
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
@@ -25,13 +28,12 @@ public class Course {
   private int hoursPerWeek;
   private String name;
 
-  @OneToOne(cascade = CascadeType.ALL)
-  @JoinColumn(name = "courseParticipants_id", referencedColumnName = "id")
-  public CourseParticipants courseParticipants;
-
   @ManyToOne
   @JoinColumn(name = "teacher_id", referencedColumnName = "id")
   public Teacher courseTeacher;
+
+  @ManyToMany
+  private List<Student> courseStudents;
 
   public Course() {
   }
@@ -41,14 +43,13 @@ public class Course {
       String name,
       int availableSeats,
       int hoursPerWeek,
-      Teacher courseTeacher,
-      CourseParticipants courseParticipants) {
+      Teacher courseTeacher) {
     this.description = description;
     this.name = name;
     this.availableSeats = availableSeats;
     this.hoursPerWeek = hoursPerWeek;
-    this.courseParticipants = courseParticipants;
     this.courseTeacher = courseTeacher;
+    this.courseStudents = new ArrayList<>();
 
     this.courseTeacher.addHours(Double.valueOf(hoursPerWeek));
   }
@@ -67,5 +68,14 @@ public class Course {
 
   public int getHoursPerWeek() {
     return this.hoursPerWeek;
+  }
+
+  public List<Student> getCourseStudentsList() {
+    return this.courseStudents;
+  }
+
+  public void enrollStudent(Student student) {
+    this.courseStudents.add(student);
+    this.availableSeats--;
   }
 }

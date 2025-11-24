@@ -12,8 +12,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.courses.entity.Course;
-import com.example.courses.service.CourseApi;
 import com.example.courses.service.CourseService;
+import com.example.courses.service.payload.CoursePayload;
+import com.example.courses.service.payload.CourseStudentPayload;
 
 @RestController
 @RequestMapping("/courses")
@@ -35,7 +36,7 @@ public class CourseController {
   }
 
   @PostMapping("/add")
-  public Course add(@RequestBody CourseApi newCourse) {
+  public Course add(@RequestBody CoursePayload newCourse) {
     return courseService.addNewCourse(newCourse);
   }
 
@@ -47,5 +48,10 @@ public class CourseController {
   @DeleteMapping("/delete")
   public void delete(@RequestParam Long id) {
     courseService.deleteCourse(id);
+  }
+
+  @PostMapping("/enroll-student")
+  public Course enrollStudent(@RequestBody CourseStudentPayload courseStudentPayload) {
+    return courseService.enrollStudentForCourse(courseStudentPayload);
   }
 }

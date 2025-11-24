@@ -1,6 +1,6 @@
-package com.example.courses.service;
+package com.example.courses.service.payload;
 
-public class CourseApi {
+public class CoursePayload {
   public int availableSeats;
   public String description;
   public int hoursPerWeek;

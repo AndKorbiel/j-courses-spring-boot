@@ -5,10 +5,13 @@ import java.util.Optional;
 import org.springframework.stereotype.Service;
 
 import com.example.courses.entity.Course;
-import com.example.courses.entity.CourseParticipants;
 import com.example.courses.repository.CourseRepository;
+import com.example.courses.service.payload.CoursePayload;
+import com.example.courses.service.payload.CourseStudentPayload;
 import com.example.staff.entity.Teacher;
 import com.example.staff.service.TeacherService;
+import com.example.students.entity.Student;
+import com.example.students.service.StudentService;
 
 import jakarta.transaction.Transactional;
 
@@ -16,10 +19,13 @@ import jakarta.transaction.Transactional;
 public class CourseService {
   private final CourseRepository courseRepository;
   private final TeacherService teacherService;
+  private final StudentService studentService;
 
-  public CourseService(CourseRepository courseRepository, TeacherService teacherService) {
+  public CourseService(CourseRepository courseRepository, TeacherService teacherService,
+      StudentService studentService) {
     this.courseRepository = courseRepository;
     this.teacherService = teacherService;
+    this.studentService = studentService;
   }
 
   public Iterable<Course> findAll() {
@@ -30,8 +36,7 @@ public class CourseService {
     return courseRepository.findById(id);
   }
 
-  public Course addNewCourse(CourseApi newCourse) {
-    CourseParticipants participants = new CourseParticipants(newCourse.availableSeats);
+  public Course addNewCourse(CoursePayload newCourse) {
     Teacher courseTeacher = teacherService.findById(newCourse.teacherId).orElse(null);
 
     Course courseToSave = new Course(
@@ -39,10 +44,18 @@ public class CourseService {
         newCourse.name,
         newCourse.availableSeats,
         newCourse.hoursPerWeek,
-        courseTeacher,
-        participants);
+        courseTeacher);
 
     return courseRepository.save(courseToSave);
+  }
+
+  public Course enrollStudentForCourse(CourseStudentPayload enrollStudentPayload) {
+    Student student = studentService.findById(enrollStudentPayload.student.id).orElse(null);
+    Course course = courseRepository.findById(enrollStudentPayload.courseId).orElse(null);
+
+    course.enrollStudent(student);
+
+    return courseRepository.save(course);
   }
 
   @Transactional
