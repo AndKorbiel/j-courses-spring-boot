@@ -54,7 +54,9 @@ public class CourseService {
     Course course = courseRepository.findById(enrollStudentPayload.courseId).orElse(null);
 
     course.enrollStudent(student);
+    student.enrollForCourse(course.id);
 
+    studentService.updateOrAddStudent(student);
     return courseRepository.save(course);
   }
 

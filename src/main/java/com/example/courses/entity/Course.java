@@ -6,18 +6,14 @@ import java.util.List;
 import com.example.staff.entity.Teacher;
 import com.example.students.entity.Student;
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 
 @Entity
 public class Course {
@@ -35,9 +31,7 @@ public class Course {
   @JsonBackReference
   public Teacher courseTeacher;
 
-  @ManyToMany
-  // @JoinTable(name = "student_coursesEnrolled", joinColumns = @JoinColumn(name =
-  // "course_id"), inverseJoinColumns = @JoinColumn(name = "student_id"))
+  @OneToMany
   private List<Student> courseStudents;
 
   public Course() {

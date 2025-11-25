@@ -1,14 +1,12 @@
 package com.example.students.entity;
 
+import java.util.ArrayList;
 import java.util.List;
-
-import com.example.courses.entity.Course;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.ManyToMany;
 
 @Entity
 public class Student {
@@ -18,9 +16,7 @@ public class Student {
 
   public String name;
 
-  @ManyToMany
-  // @ManyToMany(mappedBy = "courseStudents")
-  private List<Course> coursesEnrolled;
+  private List<Long> enrolledCoursesIds = new ArrayList<>();
 
   public Student() {
   }
@@ -33,7 +29,11 @@ public class Student {
     return this.id;
   }
 
-  public List<Course> getEnrolledCoursesList() {
-    return this.coursesEnrolled;
+  public List<Long> getEnrolledCoursesList() {
+    return this.enrolledCoursesIds;
+  }
+
+  public void enrollForCourse(Long courseId) {
+    this.enrolledCoursesIds.add(courseId);
   }
 }
